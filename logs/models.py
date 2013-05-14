@@ -40,16 +40,16 @@ class Log(models.Model):
     view_location.allow_tags= True
     def view_photo(self):
         try:
-            return '<img src="%s" heigt="100px" />' % (self.photo.url)
+            return '<img src="%s" height="100px" />' % (self.photo.url)
         except:
-            return '<img src="%s" heigt="100px" />' % (DEFAULT_PHOTO_URI)
+            return '<img src="%s" height="100px" />' % (DEFAULT_PHOTO_URI)
     view_photo.short_description = 'Affiliated Photo'
     view_photo.allow_tags= True
     def view_signature(self):
         try:
-            return '<img src="%s" width="100" heigt="100" title="%s" />' % (self.signature.url, self.photo_caption)
+            return '<img src="%s" height="100px" title="%s" />' % (self.signature.url, self.photo_caption)
         except:
-            return '<img src="%s" width="100" heigt="100" />' % (DEFAULT_SIG_URI)
+            return '<img src="%s" height="100px" />' % (DEFAULT_SIG_URI)
     view_signature.short_description = 'Affiliated Signature'
     view_signature.allow_tags= True
 
