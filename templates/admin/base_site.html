@@ -1,0 +1,16 @@
+{% extends "admin/base.html" %}
+{% load i18n grp_tags %}
+
+{% block title %}{{ title }} | Field Logs!{% endblock %}
+
+{% block extrahead %}
+
+    {{ block.super }}
+
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">{% trans 'Django administration' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
