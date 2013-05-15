@@ -53,6 +53,34 @@ class Log(models.Model):
     view_signature.short_description = 'Affiliated Signature'
     view_signature.allow_tags= True
 
+    def to_dict(self):
+        photo_uri = ''
+        try:
+            photo_uri = self.photo.url
+        except:
+            pass
+
+        sig_uri = ''
+        try:
+            sig_uri = self.signature.url
+        except:
+            pass
+
+        return {
+                'id' : self.id,
+                'latitude' : self.latitude,
+                'longitude' : self.longitude,
+                'location' : self.location,
+                'subject' : self.subject,
+                'comment' : self.comment,
+                'nationality' : self.get_nationality_display(),
+                'birthdate' : self.birthdate.strftime('%Y-%m-%d'),
+                'barcode' : self.barcode,
+                'photo' : photo_uri,
+                'photo_caption' : self.photo_caption,
+                'signature' : sig_uri
+                }
+
     class Meta:
         db_table = 'logs'
         verbose_name = 'Field Log'

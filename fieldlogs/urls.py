@@ -13,6 +13,10 @@ urlpatterns += patterns('',
     (r'^$', redirect_to, {'url': '%s/admin/' % BASE_URL}),
 )
 
+urlpatterns += patterns('logs.views',
+     (r'^api/logs/add/?','api_add_log'),
+     )
+
 urlpatterns += patterns('',
     (r'^grappelli/', include('grappelli.urls')),
 )

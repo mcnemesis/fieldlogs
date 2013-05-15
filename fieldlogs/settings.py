@@ -183,7 +183,7 @@ def make_sure_path_exists(path):
         if exception.errno != errno.EEXIST:
             raise
 
-LOG_DIR = "%s/logs" % PROJECT_DIR
+LOG_DIR = "%s/app_logs" % PROJECT_DIR
 make_sure_path_exists(LOG_DIR)
 MAIN_LOG = '%s/log_%s' % (LOG_DIR,datetime.date.strftime(datetime.date.today(),'%b_%d_%Y'))
 LOG_LEVEL = logging.DEBUG
