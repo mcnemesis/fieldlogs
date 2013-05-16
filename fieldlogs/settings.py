@@ -165,13 +165,13 @@ LOGGING = {
 }
 
 LOG_NATIONALITIES = (
-        ('motswana','Motswana'),
-        ('south','South'),
-        ('african','African'),
-        ('zimbabwean','Zimbabwean'),
-        ('british','British'),
-        ('nigerian','Nigerian'),
-        ('other','OTHER')
+        ('Motswana','Motswana'),
+        ('South','South'),
+        ('African','African'),
+        ('Zimbabwean','Zimbabwean'),
+        ('British','British'),
+        ('Nigerian','Nigerian'),
+        ('OTHER','OTHER')
         )
 
 
