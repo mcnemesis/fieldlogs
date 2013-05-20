@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">Tha Field Logs</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="default_gps_status">No GPS data collected yet</string>
+    <string name="labelSubject">Log Subject</string>
+    <string name="default_barcode">Tap to Read Barcode...</string>
+    <string name="label_nationality">Nationality</string>
+    <string name="label_birthdate">Date of Birth</string>
+    <string name="lbl_location">Location Name</string>
+    <string name="lbl_comment">Log Comment</string>
+    <string name="lbl_photo">Tap to Capture Log Photo...</string>
+    <string name="lbl_photo_caption">Photo Caption</string>
+    <string name="lbl_signature">Tap to Capture Signature...</string>
+    <string name="image_directory">FieldLogImages</string>
+    <string name="label_sign">Sign Here...</string>
+    <string name="lblBtnClearSig">Clear Signature</string>
+    <string name="lblBtnSigComplete">Save Signature...</string>
+
+</resources>

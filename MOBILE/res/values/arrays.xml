@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	<string-array name="nationalities">
+
+		<item>
+			Motswana
+		</item>
+
+		<item>
+			South
+		</item>
+
+		<item>
+			African
+		</item>
+
+		<item>
+			Zimbabwean
+		</item>
+
+		<item>
+			Nigerian
+		</item>
+
+		<item>
+			OTHER
+		</item>
+
+	</string-array>
+</resources>

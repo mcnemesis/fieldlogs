@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	<color name="white">#ffffffff</color>
+	<color name="turmeric">#FFD36F</color>
+	<color name="bella">#FF8A05</color>
+</resources>
