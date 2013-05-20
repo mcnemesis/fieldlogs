@@ -102,8 +102,11 @@ def export_logs(request):
             kind = request.POST.get('export','csv')
             response = HttpResponse(mimetype='text/csv')
             response['Content-Disposition'] = 'attachment;filename="logs.csv"'
+            #a portable way, avoiding writeheader()
             writer = csv.DictWriter(response,ExportLogsTable.COLUMNS)
-            writer.writeheader()
+            d = {}
+            map(lambda i: d.update({i:i}),ExportLogsTable.COLUMNS)
+            writer.writerow(d)
             #we choose to iterate over the table instead of the queryset, to exploit the possibility of custom
             #sorting criteria applied by user via django-tables2
             for row in logs_table.rows:
