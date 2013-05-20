@@ -67,18 +67,19 @@ class Log(models.Model):
             pass
 
         return {
-                'id' : self.id,
-                'latitude' : self.latitude,
-                'longitude' : self.longitude,
-                'location' : self.location,
-                'subject' : self.subject,
-                'comment' : self.comment,
-                'nationality' : self.get_nationality_display(),
-                'birthdate' : self.birthdate.strftime('%Y-%m-%d'),
-                'barcode' : self.barcode,
-                'photo' : photo_uri,
-                'photo_caption' : self.photo_caption,
-                'signature' : sig_uri
+                'ID' : self.id,
+                'LATITUDE' : self.latitude,
+                'LONGITUDE' : self.longitude,
+                'LOCATION' : self.location,
+                'SUBJECT' : self.subject,
+                'COMMENT' : self.comment,
+                'NATIONALITY' : self.get_nationality_display(),
+                'BIRTHDATE' : self.birthdate.strftime('%Y-%m-%d'),
+                'BARCODE' : self.barcode,
+                'PHOTO' : photo_uri,
+                'PHOTO_CAPTION' : self.photo_caption,
+                'SIGNATURE' : sig_uri,
+                'CREATED' : self.created.strftime('%Y-%m-%d %H:%M')
                 }
 
     class Meta:

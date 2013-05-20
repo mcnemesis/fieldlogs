@@ -15,7 +15,8 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('logs.views',
      (r'^api/logs/add/?','api_add_log'),
-     )
+    (r'^admin/fieldlogs/log/export/?$', 'export_logs'),
+ )
 
 urlpatterns += patterns('',
     (r'^grappelli/', include('grappelli.urls')),

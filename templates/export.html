@@ -1,0 +1,62 @@
+{% extends "admin/base_site.html" %}
+{% load render_table from django_tables2 %}
+
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript">
+    function export_csv() {
+        var $ = grp.jQuery;
+        $('#export').val('csv');
+        $('#export_form').submit();
+    }
+
+    </script>
+    <style>
+        .sleek_button{
+        border:1px solid #72021c;-webkit-box-shadow: #B4B5B5 1px 1px 1px  ;-moz-box-shadow: #B4B5B5 1px 1px 1px ; box-shadow: #B4B5B5 1px 1px 1px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; text-align: center; color: #FFFFFF; background-color: #a90329;
+         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a90329), color-stop(100%, #6d0019));
+         background-image: -webkit-linear-gradient(top, #a90329, #6d0019);
+         background-image: -moz-linear-gradient(top, #a90329, #6d0019);
+         background-image: -ms-linear-gradient(top, #a90329, #6d0019);
+         background-image: -o-linear-gradient(top, #a90329, #6d0019);
+         background-image: linear-gradient(top, #a90329, #6d0019);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a90329, endColorstr=#6d0019);
+        }
+
+        .sleek_button:hover{
+         border:1px solid #450111; background-color: #77021d;
+         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#77021d), color-stop(100%, #3a000d));
+         background-image: -webkit-linear-gradient(top, #77021d, #3a000d);
+         background-image: -moz-linear-gradient(top, #77021d, #3a000d);
+         background-image: -ms-linear-gradient(top, #77021d, #3a000d);
+         background-image: -o-linear-gradient(top, #77021d, #3a000d);
+         background-image: linear-gradient(top, #77021d, #3a000d);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#77021d, endColorstr=#3a000d);
+        }
+
+        .sleek_button {
+            cursor:pointer;
+            cursor:hand;
+            margin : 20px;
+            width : 200px;
+        }
+
+</style>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul>
+        <li><a href="{{ dashboard_url }}">Home</a></li>
+        <li><a href="{{ parent_url }}">{{ parent }}</a></li>
+        <li>{{ title }}</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+{% render_table table %}
+
+<form name="export_form" method="POST" id="export_form" >
+    <input type="hidden" name="export" value="csv" />
+    <div class="sleek_button" onclick="export_csv()">Export as CSV</div>
+</form>
+{% endblock %}

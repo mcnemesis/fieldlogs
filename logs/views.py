@@ -6,9 +6,23 @@ from django.shortcuts import render_to_response
 import json
 import logging
 import datetime
+import django_tables2 as tables
+from django_tables2   import RequestConfig
+from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
+import csv
 
 logging.basicConfig(level=LOG_LEVEL, filename=MAIN_LOG)
 logger = logging.getLogger(__name__)
+
+
+class ExportLogsTable(tables.Table):
+    COLUMNS = ['ID','CREATED','LATITUDE','LONGITUDE','LOCATION','SUBJECT','COMMENT','NATIONALITY','BIRTHDATE','BARCODE', 'PHOTO','PHOTO_CAPTION','SIGNATURE',]
+    class Meta:
+        model = Log
+        attrs = {"class": "paleblue"}
+        exclude = ('updated',)
+        sequence = ('id','created','latitude','longitude','location','subject','comment','nationality','birthdate','barcode', 'photo','photo_caption','signature',)
 
 
 def j_response(payload, msg, status):
@@ -61,3 +75,49 @@ def api_add_log(request):
         return j_ok( log.to_dict(), 'Log : %s' % log.id)
     else:
         return j_error('Required: sig, %s' % ', '.join(required))
+
+
+@csrf_exempt
+@login_required
+def export_logs(request):
+    logs = None
+    if 'limit' in request.GET:
+        ids = map(int,request.GET['limit'].split(','))
+        logs = Log.objects.filter(id__in=ids)
+    else:
+        filters = {}
+        for filter,arg in request.GET.items():
+            if filter != 'sort': #ignore django-tables2 sort keywords
+                filters.update({filter:arg})
+        try:
+            logs = Log.objects.filter(**filters)
+        except:
+            logs = Log.objects.all()
+
+    logs_table = ExportLogsTable(logs)
+    RequestConfig(request).configure(logs_table)
+
+    if request.method == 'POST':
+        if 'export' in request.POST:
+            kind = request.POST.get('export','csv')
+            response = HttpResponse(mimetype='text/csv')
+            response['Content-Disposition'] = 'attachment;filename="logs.csv"'
+            writer = csv.DictWriter(response,ExportLogsTable.COLUMNS)
+            writer.writeheader()
+            #we choose to iterate over the table instead of the queryset, to exploit the possibility of custom
+            #sorting criteria applied by user via django-tables2
+            for row in logs_table.rows:
+                writer.writerow(row.record.to_dict())
+
+            return response
+
+
+    parent_uri = "%s/admin/%s/%s/" %(BASE_URL,Log._meta.app_label,  Log._meta.module_name)
+    dashboard_url = "%s/admin/" %(BASE_URL)
+    return render_to_response('export.html',RequestContext(request,{
+            'title' : 'Export Field Logs',
+            'parent' : 'Field Logs',
+            'table' : logs_table,
+            'parent_url' : parent_uri,
+            'dashboard_url' : dashboard_url
+        }))
